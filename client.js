@@ -1,7 +1,6 @@
 const dgram = require("dgram");
 const uuid = require('uuid');
 
-// PORT og HOST for DigitalOcean droplet
 const PORT = 6790;
 const HOST = '134.209.234.180';
 
@@ -38,16 +37,13 @@ function bufferToMessage(buffer) {
     }
 }
 
-// Wait for timeout milliseconds
 function wait(timeout) {
     return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
 function sendMessage(message, port, host) {
-    // Save the messages to our list...
     messages.push(message);
-    console.log(`Sending message #${messages.length}...`);
-    // Set the time we send out message...
+    console.log(`Sending message ${message.uuid} as number #${messages.length} ...`);
     message.sentTimestamp = new Date().getTime();
     let messageBuffer = messageToBuffer(message);
     return new Promise((resolve, reject) => {
@@ -67,9 +63,9 @@ async function sendMessages(messageCount, port, host, timeout) {
         await sendMessage(message, port, host);
         await wait(timeout);
         if (message.responseTimestamp) {
-            console.log(`Response received after ${message.responseTimestamp - message.sentTimestamp} ms...`);
+            console.log(`Response received for message ${message.uuid} after ${message.responseTimestamp - message.sentTimestamp} ms ...\n`);
         } else {
-            console.log(`No response received after ${timeout} ms...`);
+            console.log(`No response received for message ${message.uuid} after ${timeout} ms ...\n`);
         }
     }
     logStatistics(messages);
