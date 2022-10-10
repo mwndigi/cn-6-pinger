@@ -1,9 +1,9 @@
 const dgram = require("dgram");
 const uuid = require('uuid');
 
-// DigitalOcean droplet i Frankfurt, Amsterdam og Singapore
+// DigitalOcean droplet i Frankfurt, Amsterdam, Singapore og San Francisco
 const PORT = 6790;
-const HOSTS = ['134.209.234.180', '167.172.32.197', '139.59.228.134'];
+const HOSTS = ['134.209.234.180', '167.172.32.197', '139.59.228.134', '161.35.224.80'];
 
 const client = dgram.createSocket("udp4");
 
@@ -87,5 +87,5 @@ function logStatistics(messages) {
     }
 }
 
-// index 0 for Frankfurt, 1 for Amsterdam og 2 for Singapore
-sendMessages(10, PORT, HOSTS[2], 1000);
+// index 0 for Frankfurt, 1 for Amsterdam, 2 for Singapore og 3 for San Francisco
+sendMessages(10, PORT, HOSTS[3], 1000);
