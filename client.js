@@ -87,4 +87,5 @@ function logStatistics(messages) {
     }
 }
 
+// index 0 for Frankfurt, 1 for Amsterdam og 2 for Singapore
 sendMessages(10, PORT, HOSTS[2], 1000);
